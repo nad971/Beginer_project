@@ -6,12 +6,6 @@ cursor = connection.cursor()
 
 cursor.execute("PRAGMA foreign_keys = ON")
 
-# Удаляем старые таблицы 
-cursor.execute("DROP TABLE IF EXISTS games")
-cursor.execute("DROP TABLE IF EXISTS platforms")
-cursor.execute("DROP TABLE IF EXISTS progress")
-
-
 # Таблица 1: Платформы (3 столбца)
 
 cursor.execute("""
@@ -45,7 +39,3 @@ CREATE TABLE games (
     FOREIGN KEY (progress_id) REFERENCES progress(id)
 )
 """)
-
-connection.commit()
-
-
