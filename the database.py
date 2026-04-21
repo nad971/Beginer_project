@@ -39,3 +39,37 @@ CREATE TABLE games (
     FOREIGN KEY (progress_id) REFERENCES progress(id)
 )
 """)
+
+# Пользовательский ввод
+print(" Введите название игры: ")
+title = input()
+
+print("Введите платформу: ")
+platform_name = input()
+
+print(" Введите жанр: ")
+genre = input()
+
+print(" Введите год выпуска: ")
+year = int(input())
+
+print(" Введите статус : ")
+status = input()
+
+print("Введите сколько часов наиграно: ")
+hours = int(input())
+
+print(" Введите оценку (1-10): ")
+rating = int(input())
+
+cursor.execute("""
+INSERT INTO platforms (name, company) VALUES (?, ?)
+""")
+
+cursor.execute("""
+INSERT INTO progress (status, hours_played, rating) VALUES (?, ?, ?)
+""")
+
+cursor.execute("""
+INSERT INTO games (title, platform_id, genre, year, progress_id) VALUES (?, ?, ?, ?, ?)
+""")
