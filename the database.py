@@ -71,6 +71,8 @@ INSERT INTO progress (status, hours_played, rating) VALUES (?, ?, ?)
 """,(status,hours,rating))
 
 #Заполнение таблиц в вручную
+# INSERT INTO таблица (поля)
+# VALUES (значения);
 cursor.execute("""
 INSERT INTO games (title,platform_name,genre,year)
 VALUES("Resident Evil 4","экшен","PC", 2026)
@@ -195,5 +197,6 @@ cursor.execute("""
 INSERT INTO games (title,platform_id,genre,year,progress_id ) VALUES (?, ?, ?, ? ,?)
 """,games_array)
 
+#Закрытие соединения
 connection.commit()
 connection.close()
