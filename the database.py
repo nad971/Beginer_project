@@ -64,40 +64,6 @@ rating = int(input())
 
 cursor.execute("""
 INSERT INTO platforms (name, company) VALUES (?, ?)
-""")
-
-cursor.execute("""
-INSERT INTO progress (status, hours_played, rating) VALUES (?, ?, ?)
-""")
-
-cursor.execute("""
-INSERT INTO games (title, platform_id, genre, year, progress_id) VALUES (?, ?, ?, ?, ?)
-""")
-
-# Пользовательский ввод
-print(" Введите название игры: ")
-title = input()
-
-print("Введите платформу: ")
-platform_name = input()
-
-print(" Введите жанр: ")
-genre = input()
-
-print(" Введите год выпуска: ")
-year = int(input())
-
-print(" Введите статус : ")
-status = input()
-
-print("Введите сколько часов наиграно: ")
-hours = int(input())
-
-print(" Введите оценку (1-10): ")
-rating = int(input())
-
-cursor.execute("""
-INSERT INTO platforms (name, company) VALUES (?, ?)
 """,(title,platform_name,genre,year))
 
 cursor.execute("""
@@ -127,45 +93,7 @@ VALUES("Perfect Dark","приключение","Xbox Game Studios", 2025)
 """)
 
 #Через случайные комбинации
-platform_array=[(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),()
-]
-cursor.execute("""
-INSERT INTO platforms (name, company) VALUES (?, ?)
-""",platform_array)
-
-progress_array=[(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),()
-]
-cursor.execute("""
-INSERT INTO progress (status, hours_played, rating) VALUES (?, ?, ?)
-""",progress_array)
-
-games_array=[(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),(),
-(),(),(),(),(),() 
-]
-cursor.execute("""
-INSERT INTO games (title,platform_id,genre,year,progress_id ) VALUES (?, ?, ?, ? ,?)
-""",games_array)
-
-connection.commit()
-connection.close()
-Понимаю задачу: нужно заполнить массивы осмысленными случайными данными, которые логически связаны между собой (игры ссылаются на платформы и прогресс через ID).
-
-Предположим, что таблицы имеют автоинкрементные первичные ключи (id), и данные вставляются последовательно. Вот пример заполнения:
-
-```python
-platform_array = [
-    ('PlayStation 5', 'Sony'),
+platform_array=[('PlayStation 5', 'Sony'),
     ('Xbox Series X', 'Microsoft'),
     ('Nintendo Switch', 'Nintendo'),
     ('PC', 'Various'),
@@ -195,41 +123,45 @@ platform_array = [
     ('PlayStation Portable', 'Sony'),
     ('Nintendo DS', 'Nintendo')
 ]
+cursor.execute("""
+INSERT INTO platforms (name, company) VALUES (?, ?)
+""",platform_array)
 
-progress_array = [
-    ('Completed', 45.5, 9),
+progress_array=[ ('Completed', 45.5, 9),
     ('In Progress', 12.0, 8),
     ('Dropped', 3.0, 4),
     ('Completed', 80.2, 10),
     ('On Hold', 8.5, 7),
-    ('Not Started', 0.0, None),
+    ('In Progress', 56.0, 7),
     ('Completed', 25.0, 9),
     ('In Progress', 15.5, 8),
     ('Completed', 60.0, 9),
     ('Dropped', 5.5, 5),
-    ('Not Started', 0.0, None),
+    ('Not Started', 0.0, 8),
     ('Completed', 30.0, 10),
     ('In Progress', 20.0, 7),
     ('On Hold', 2.5, 6),
     ('Completed', 55.0, 8),
-    ('Not Started', 0.0, None),
+    ('In Progress', 17.0, 4),
     ('In Progress', 10.0, 9),
     ('Completed', 40.0, 8),
     ('Dropped', 1.0, 3),
     ('Completed', 70.5, 10),
     ('In Progress', 18.0, 7),
-    ('Not Started', 0.0, None),
     ('Completed', 22.5, 9),
     ('On Hold', 6.0, 8),
-    ('In Progress', 14.0, 8),
+    ('In Progress', 14.0, 5),
+    ('In Progress', 19.0, 8),
+    ('In Progress', 45.0, 9),
     ('Completed', 35.0, 7),
     ('Dropped', 2.0, 5),
-    ('Not Started', 0.0, None),
     ('Completed', 90.0, 9)
 ]
+cursor.execute("""
+INSERT INTO progress (status, hours_played, rating) VALUES (?, ?, ?)
+""",progress_array)
 
-games_array = [
-    ('Elden Ring', 1, 'RPG', 2022, 1),
+games_array=[ ('Elden Ring', 1, 'RPG', 2022, 1),
     ('Halo Infinite', 2, 'FPS', 2021, 2),
     ('Zelda: Breath of the Wild', 3, 'Adventure', 2017, 4),
     ('Cyberpunk 2077', 4, 'RPG', 2020, 3),
@@ -259,10 +191,9 @@ games_array = [
     ('God of War: Chains of Olympus', 28, 'Action', 2008, 28),
     ('Castlevania: Dawn of Sorrow', 29, 'Metroidvania', 2005, 29)
 ]
-```
+cursor.execute("""
+INSERT INTO games (title,platform_id,genre,year,progress_id ) VALUES (?, ?, ?, ? ,?)
+""",games_array)
 
-Пояснения:
-
-· platform_array: 29 различных платформ от современных до ретро
-· progress_array: 29 записей с разными статусами (Completed, In Progress, Dropped, On Hold, Not Started) и соответствующими часами/рейтингом (None для неначатых игр)
-· games_array: 29 игр, где platform_id ссылается на индекс платформы (1–29), а progress_id — на индекс прогресса (1–29). Жанры, года и названия подобраны реалистично
+connection.commit()
+connection.close()
