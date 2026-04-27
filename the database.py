@@ -159,3 +159,110 @@ INSERT INTO games (title,platform_id,genre,year,progress_id ) VALUES (?, ?, ?, ?
 
 connection.commit()
 connection.close()
+Понимаю задачу: нужно заполнить массивы осмысленными случайными данными, которые логически связаны между собой (игры ссылаются на платформы и прогресс через ID).
+
+Предположим, что таблицы имеют автоинкрементные первичные ключи (id), и данные вставляются последовательно. Вот пример заполнения:
+
+```python
+platform_array = [
+    ('PlayStation 5', 'Sony'),
+    ('Xbox Series X', 'Microsoft'),
+    ('Nintendo Switch', 'Nintendo'),
+    ('PC', 'Various'),
+    ('PlayStation 4', 'Sony'),
+    ('Xbox One', 'Microsoft'),
+    ('Nintendo 3DS', 'Nintendo'),
+    ('Steam Deck', 'Valve'),
+    ('PlayStation 3', 'Sony'),
+    ('Xbox 360', 'Microsoft'),
+    ('Wii U', 'Nintendo'),
+    ('Mobile (iOS)', 'Apple'),
+    ('Mobile (Android)', 'Google'),
+    ('PlayStation Vita', 'Sony'),
+    ('Nintendo Wii', 'Nintendo'),
+    ('Sega Genesis', 'Sega'),
+    ('Super Nintendo', 'Nintendo'),
+    ('Game Boy Advance', 'Nintendo'),
+    ('Dreamcast', 'Sega'),
+    ('Nintendo 64', 'Nintendo'),
+    ('PlayStation 2', 'Sony'),
+    ('Xbox', 'Microsoft'),
+    ('GameCube', 'Nintendo'),
+    ('Atari 2600', 'Atari'),
+    ('Commodore 64', 'Commodore'),
+    ('Sega Saturn', 'Sega'),
+    ('Neo Geo', 'SNK'),
+    ('PlayStation Portable', 'Sony'),
+    ('Nintendo DS', 'Nintendo')
+]
+
+progress_array = [
+    ('Completed', 45.5, 9),
+    ('In Progress', 12.0, 8),
+    ('Dropped', 3.0, 4),
+    ('Completed', 80.2, 10),
+    ('On Hold', 8.5, 7),
+    ('Not Started', 0.0, None),
+    ('Completed', 25.0, 9),
+    ('In Progress', 15.5, 8),
+    ('Completed', 60.0, 9),
+    ('Dropped', 5.5, 5),
+    ('Not Started', 0.0, None),
+    ('Completed', 30.0, 10),
+    ('In Progress', 20.0, 7),
+    ('On Hold', 2.5, 6),
+    ('Completed', 55.0, 8),
+    ('Not Started', 0.0, None),
+    ('In Progress', 10.0, 9),
+    ('Completed', 40.0, 8),
+    ('Dropped', 1.0, 3),
+    ('Completed', 70.5, 10),
+    ('In Progress', 18.0, 7),
+    ('Not Started', 0.0, None),
+    ('Completed', 22.5, 9),
+    ('On Hold', 6.0, 8),
+    ('In Progress', 14.0, 8),
+    ('Completed', 35.0, 7),
+    ('Dropped', 2.0, 5),
+    ('Not Started', 0.0, None),
+    ('Completed', 90.0, 9)
+]
+
+games_array = [
+    ('Elden Ring', 1, 'RPG', 2022, 1),
+    ('Halo Infinite', 2, 'FPS', 2021, 2),
+    ('Zelda: Breath of the Wild', 3, 'Adventure', 2017, 4),
+    ('Cyberpunk 2077', 4, 'RPG', 2020, 3),
+    ('God of War Ragnarök', 5, 'Action', 2022, 5),
+    ('Forza Horizon 5', 6, 'Racing', 2021, 6),
+    ('Pokémon X', 7, 'RPG', 2013, 7),
+    ('Vampire Survivors', 8, 'Action', 2022, 8),
+    ('The Last of Us', 9, 'Action-Adventure', 2013, 9),
+    ('Gears of War 3', 10, 'TPS', 2011, 10),
+    ('Mario Kart 8', 11, 'Racing', 2014, 11),
+    ('Genshin Impact', 12, 'RPG', 2020, 12),
+    ('PUBG Mobile', 13, 'Battle Royale', 2018, 13),
+    ('Persona 4 Golden', 14, 'RPG', 2012, 14),
+    ('Super Mario Galaxy', 15, 'Platformer', 2007, 15),
+    ('Sonic the Hedgehog 2', 16, 'Platformer', 1992, 16),
+    ('Chrono Trigger', 17, 'RPG', 1995, 17),
+    ('Metroid Fusion', 18, 'Metroidvania', 2002, 18),
+    ('Shenmue', 19, 'Adventure', 1999, 19),
+    ('Super Mario 64', 20, 'Platformer', 1996, 20),
+    ('Final Fantasy X', 21, 'RPG', 2001, 21),
+    ('Fable', 22, 'RPG', 2004, 22),
+    ('Resident Evil 4', 23, 'Horror', 2005, 23),
+    ('Pitfall!', 24, 'Platformer', 1982, 24),
+    ('Maniac Mansion', 25, 'Adventure', 1987, 25),
+    ('Panzer Dragoon Saga', 26, 'RPG', 1998, 26),
+    ('Metal Slug 3', 27, 'Run and Gun', 2000, 27),
+    ('God of War: Chains of Olympus', 28, 'Action', 2008, 28),
+    ('Castlevania: Dawn of Sorrow', 29, 'Metroidvania', 2005, 29)
+]
+```
+
+Пояснения:
+
+· platform_array: 29 различных платформ от современных до ретро
+· progress_array: 29 записей с разными статусами (Completed, In Progress, Dropped, On Hold, Not Started) и соответствующими часами/рейтингом (None для неначатых игр)
+· games_array: 29 игр, где platform_id ссылается на индекс платформы (1–29), а progress_id — на индекс прогресса (1–29). Жанры, года и названия подобраны реалистично
