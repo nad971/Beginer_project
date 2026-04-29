@@ -111,7 +111,7 @@ platform_array=[('PlayStation 5', 'Sony'),
     ('PlayStation Portable', 'Sony'),
     ('Nintendo DS', 'Nintendo')
 ]
-cursor.execute("""
+cursor.executemany("""
 INSERT INTO platforms (name, company) VALUES (?, ?)
 """,platform_array)
 
@@ -145,7 +145,7 @@ progress_array=[ ('Completed', 45.5, 9),
     ('Dropped', 2.0, 5),
     ('Completed', 90.0, 9)
 ]
-cursor.execute("""
+cursor.executemany("""
 INSERT INTO progress (status, hours_played, rating) VALUES (?, ?, ?)
 """,progress_array)
 
@@ -179,7 +179,7 @@ games_array=[ ('Elden Ring', 1, 'RPG', 2022, 1),
     ('God of War: Chains of Olympus', 28, 'Action', 2008, 28),
     ('Castlevania: Dawn of Sorrow', 29, 'Metroidvania', 2005, 29)
 ]
-cursor.execute("""
+cursor.executemany("""
 INSERT INTO games (title,platform_id,genre,year,progress_id ) VALUES (?, ?, ?, ? ,?)
 """,games_array)
 
