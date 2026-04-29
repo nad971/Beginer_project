@@ -1,0 +1,25 @@
+--SELECT title FROM games
+--SELECT company FROM platforms
+--SELECT status FROM progress 
+--SELECT title FROM games WHERE year > 2020
+--SELECT title FROM games WHERE genre = "RPG"
+--SELECT * FROM games
+--SELECT * FROM platforms
+--SELECT * FROM progress
+--SELECT * FROM title FROM games
+--SELECT * FROM company FROM platforms
+--SELECT * FROM games WHERE year > 2020
+--SELECT * FROM games WHERE genre = "RPG"
+--SELECT * FROM games WHERE platform_id=3
+--SELECT * FROM games WHERE title = "Elden Ring"
+--SELECT * FROM games WHERE year < 2000
+--SELECT * FROM platforms WHERE company= "Nintendo"
+--SELECT * FROM progress WHERE rating >=5
+--SELECT * FROM progress WHERE status = "Completed"
+--SELECT * FROM games WHERE genre = "RPG" AND year > 2015
+--SELECT * FROM games WHERE year = 2021 OR year = 2022
+--SELECT * FROM progress WHERE status = "Completed" AND hours_played > 10
+--SELECT * FROM platforms WHERE company= "Sony" OR company= "Microsoft"games
+--SELECT * FROM progress WHERE status = "Completed" AND rating=10
+--SELECT * FROM games WHERE platform_id=1 AND year=2023
+--SELECT * FROM games WHERE genre = "RPG" OR genre = "Adventure"
