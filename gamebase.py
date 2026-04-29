@@ -1,4 +1,5 @@
 import sqlite3
+import csv
 
 # Создание и подключение к БД
 connection = sqlite3.connect('games.db')
