@@ -6,6 +6,11 @@ cursor = connection.cursor()
 
 cursor.execute("PRAGMA foreign_keys = ON")
 
+#Удаление старых таблиц
+cursor.execute("DROP TABLE IF EXISTS platforms")
+cursor.execute("DROP TABLE IF EXISTS progress")
+cursor.execute("DROP TABLE IF EXISTS games")
+               
 # Таблица 1: Платформы (3 столбца)
 
 cursor.execute("""
@@ -42,56 +47,37 @@ CREATE TABLE games (
 
 # Пользовательский ввод
 print(" Введите название игры: ")
-title = input()
+name = input()
 
 print("Введите платформу: ")
-platform_name = input()
-
-print(" Введите жанр: ")
-genre = input()
-
-print(" Введите год выпуска: ")
-year = int(input())
-
-print(" Введите статус : ")
-status = input()
-
-print("Введите сколько часов наиграно: ")
-hours = int(input())
-
-print(" Введите оценку (1-10): ")
-rating = int(input())
+company = input()
 
 cursor.execute("""
 INSERT INTO platforms (name, company) VALUES (?, ?)
-""",(title,platform_name,genre,year))
-
-cursor.execute("""
-INSERT INTO progress (status, hours_played, rating) VALUES (?, ?, ?)
-""",(status,hours,rating))
+""",(name, company))
 
 #Заполнение таблиц в вручную
 # INSERT INTO таблица (поля)
 # VALUES (значения);
 cursor.execute("""
-INSERT INTO games (title,platform_name,genre,year)
-VALUES("Resident Evil 4","экшен","PC", 2026)
+INSERT INTO  progress (status,hours_played,rating)
+VALUES("Completed", "80.0", "9")
 """)
 cursor.execute("""
-INSERT INTO games (title,platform_name,genre,year)
-VALUES("The Sims 4","Симулятор"," PlayStation 4", 2014)
+INSERT INTO  progress (status,hours_played,rating)
+VALUES("In Progress","67.0", "9")
 """)
 cursor.execute("""
-INSERT INTO games (title,platform_name,genre,year)
-VALUES("The Elder Scrolls 5: Skyrim","фэнтези","PlayStation 3", 2011)
+INSERT INTO progress (status,hours_played,rating)
+VALUES("On Hold", "2.9", "7")
 """)
 cursor.execute("""
-INSERT INTO games (title,platform_name,genre,year)
-VALUES("Crimson Desert","ролевая игра","Xbox Series X", 2026)
+INSERT INTO progress (status,hours_played,rating)
+VALUES("In Progress", "27.0", "5")
 """)
 cursor.execute("""
-INSERT INTO games (title,platform_name,genre,year)
-VALUES("Perfect Dark","приключение","Xbox Game Studios", 2025)
+INSERT INTO  progress (status,hours_played,rating)
+VALUES("Dropped", "7.0", "1")
 """)
 
 #Через случайные комбинации
@@ -132,7 +118,7 @@ INSERT INTO platforms (name, company) VALUES (?, ?)
 progress_array=[ ('Completed', 45.5, 9),
     ('In Progress', 12.0, 8),
     ('Dropped', 3.0, 4),
-    ('Completed', 80.2, 10),
+    ('In Progress', 15.8, 8),
     ('On Hold', 8.5, 7),
     ('In Progress', 56.0, 7),
     ('Completed', 25.0, 9),
