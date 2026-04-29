@@ -12,7 +12,7 @@ cursor.execute("DROP TABLE IF EXISTS platforms")
 cursor.execute("DROP TABLE IF EXISTS progress")
 cursor.execute("DROP TABLE IF EXISTS games")
                
-# Таблица 1: Платформы (3 столбца)
+# Таблица 1: Платформы 
 
 cursor.execute("""
 CREATE TABLE platforms (
@@ -22,7 +22,7 @@ CREATE TABLE platforms (
 )
 """)
 
-# Таблица 2: Прогресс (4 столбца)
+# Таблица 2: Прогресс 
 cursor.execute("""
 CREATE TABLE progress (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -32,7 +32,7 @@ CREATE TABLE progress (
 )
 """)
 
-# Таблица 3: Игры (6 столбцов)
+# Таблица 3: Игры 
 cursor.execute("""
 CREATE TABLE games (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
